@@ -1,3 +1,4 @@
+/*
 package com.example.SkillTribe.model;
 
 import jakarta.persistence.*;
@@ -15,3 +16,4 @@ public class UserTask {
     private LocalDateTime due;
     private boolean isCompleted;
 }
+*/
