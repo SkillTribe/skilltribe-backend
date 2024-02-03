@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface TaskService {
     List<Task> getAll();
-    Task getById();
+    Task getById(Long id);
     Task createTask(Task task);
     Task updateTask(Long id, Task task);
     void deleteTask(Task task);
+    // todo add/remove related skill
 }

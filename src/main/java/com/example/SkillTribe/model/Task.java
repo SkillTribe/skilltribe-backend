@@ -2,13 +2,14 @@ package com.example.SkillTribe.model;
 
 import com.example.SkillTribe.model.enums.ETaskGoal;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashSet;
 
-@Getter
-@Setter
+@Getter(AccessLevel.PUBLIC)
+@Setter(AccessLevel.PUBLIC)
 @Entity
 @Table(name = "task")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -32,4 +33,10 @@ public class Task {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "task_goal")
     protected ETaskGoal taskGoal;
+
+    public void update(Task task) {
+        this.description = task.description;
+        this.experience = task.experience;
+        this.taskGoal = task.taskGoal;
+    }
 }
