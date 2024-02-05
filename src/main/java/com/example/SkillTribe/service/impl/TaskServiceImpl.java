@@ -47,4 +47,16 @@ class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
         taskRepository.delete(task);
     }
+
+    @Override
+    public Task addRelatedSkill(Task task, Skill skill) {
+        task.getRelatedSkill().add(skill);
+        return taskRepository.save(task);
+    }
+
+    @Override
+    public Task removeRelatedSkill(Task task, Skill skill) {
+        task.getRelatedSkill().remove(skill);
+        return taskRepository.save(task);
+    }
 }
