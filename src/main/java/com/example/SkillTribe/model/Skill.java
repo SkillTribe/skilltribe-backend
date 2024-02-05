@@ -23,4 +23,9 @@ public class Skill extends BaseModel{
     @Column(name = "skill_level")
     private ESkillLevel skillLevel;
 
+    public void update(Skill skill) {
+        this.name = skill.getName();
+        this.description = skill.getDescription();
+        this.skillLevel = skill.skillLevel;
+    }
 }
