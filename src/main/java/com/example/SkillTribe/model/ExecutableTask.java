@@ -20,4 +20,10 @@ public class ExecutableTask extends Task {
     private User user;
     @Column(name = "is_complete")
     private Boolean isComplete;
+
+    public void update(ExecutableTask task) {
+        super.update(task);
+        this.due = task.getDue();
+        this.comment = task.getComment();
+    }
 }
