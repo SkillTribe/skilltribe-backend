@@ -26,4 +26,8 @@ public class Guide extends BaseModel {
                     referencedColumnName = "id"))
     private HashSet<Skill> skills;
 
+    public void update(Guide guide) {
+        this.name = guide.getName();
+        this.description = guide.getDescription();
+    }
 }

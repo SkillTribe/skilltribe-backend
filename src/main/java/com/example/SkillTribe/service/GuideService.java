@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface GuideService {
     List<Guide> getAll();
-    Guide getById();
+    Guide getById(Long id);
     Guide createGuide(Guide guide);
     Guide updateGuide(Long id, Guide guide);
     void deleteGuide(Guide guide);
 
-    Guide addRelatedSkill(Skill skill);
-    Guide removeRelatedSkill(Skill skill);
-    Guide addTask(GuideTask guideTask);
-    Guide removeTask(GuideTask guideTask);
+    Guide addRelatedSkill(Long id, Skill skill);
+    Guide removeRelatedSkill(Long id, Skill skill);
+    /*Guide addTask(GuideTask guideTask);
+    Guide removeTask(GuideTask guideTask);*/
 }
