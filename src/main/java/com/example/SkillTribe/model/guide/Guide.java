@@ -2,22 +2,32 @@ package com.example.SkillTribe.model.guide;
 
 import com.example.SkillTribe.model.BaseModel;
 import com.example.SkillTribe.model.Skill;
-import com.example.SkillTribe.model.User;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 
 @Entity
+@Getter
+@Setter
+@Table(name = "guide")
 public class Guide extends BaseModel {
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
-    @ManyToOne
-    private Skill skills;
-    @OneToMany
-    private HashSet<GuideTask> guideTasks;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private GuidePlan guidePlan;
     @ManyToMany
-    private HashSet<User> users;
+    @JoinTable(name = "guide_skill",
+            joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "guide_id",
+                    referencedColumnName = "id"))
+    private HashSet<Skill> skills;
 
+    public void update(Guide guide) {
+        this.name = guide.getName();
+        this.description = guide.getDescription();
+    }
 }
