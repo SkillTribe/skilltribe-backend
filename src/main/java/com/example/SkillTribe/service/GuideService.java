@@ -15,6 +15,9 @@ public interface GuideService {
 
     Guide addRelatedSkill(Long id, Skill skill);
     Guide removeRelatedSkill(Long id, Skill skill);
-    /*Guide addTask(GuideTask guideTask);
-    Guide removeTask(GuideTask guideTask);*/
+
+    Guide addTask(Long guideId, GuideTask guideTask);
+
+    Guide removeTask(Long guideId, Long guideTaskId);
+
 }

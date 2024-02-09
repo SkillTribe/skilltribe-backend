@@ -3,10 +3,11 @@ package com.example.SkillTribe.service.impl;
 import com.example.SkillTribe.exception.NotFoundException;
 import com.example.SkillTribe.model.Skill;
 import com.example.SkillTribe.model.guide.Guide;
+import com.example.SkillTribe.model.guide.GuidePlan;
 import com.example.SkillTribe.model.guide.GuideTask;
 import com.example.SkillTribe.service.GuideService;
-import com.example.SkillTribe.service.SkillService;
 import com.example.SkillTribe.service.repository.guide.GuideRepository;
+import com.example.SkillTribe.service.repository.guide.GuideTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,12 @@ import java.util.List;
 @Service
 class GuideServiceImpl implements GuideService {
     private final GuideRepository guideRepository;
+    private final GuideTaskRepository guideTaskRepository;
 
     @Autowired
-    public GuideServiceImpl(GuideRepository guideRepository) {
+    public GuideServiceImpl(GuideRepository guideRepository, GuideTaskRepository guideTaskRepository) {
         this.guideRepository = guideRepository;
+        this.guideTaskRepository = guideTaskRepository;
     }
 
     @Override
@@ -63,13 +66,23 @@ class GuideServiceImpl implements GuideService {
         return guideRepository.save(toUpdate);
     }
 
-    /*@Override
-    public Guide addTask(GuideTask guideTask) {
-        return null;
+    @Override
+    public Guide addTask(Long guideId, GuideTask guideTask) {
+        Guide guide = getById(guideId);
+        GuidePlan guidePlan = guide.getGuidePlan();
+        guideTask.setGuidePlan(guidePlan);
+        guideTask = guideTaskRepository.save(guideTask);
+        return guide;
     }
 
     @Override
-    public Guide removeTask(GuideTask guideTask) {
-        return null;
-    }*/
+    public Guide removeTask(Long guideId, Long guideTaskId) {
+        Guide guide = getById(guideId);
+        GuidePlan guidePlan = guide.getGuidePlan();
+        GuideTask guideTask = guideTaskRepository.findById(guideId).orElseThrow(() -> new NotFoundException(GuideTask.class, guideTaskId));
+        guideTask.setGuidePlan(null);
+        guidePlan.getGuideTasks().remove(guideTask);
+        guideTask = guideTaskRepository.save(guideTask);
+        return guide;
+    }
 }
