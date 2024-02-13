@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -15,8 +15,8 @@ public class GuidePlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @OneToMany(fetch = FetchType.EAGER)
-    private HashSet<GuidePlanItem> guidePlanItems;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "guidePlan")
+    private Set<GuideTask> guideTasks;
     @OneToOne
     @JoinColumn(name = "guide_id")
     private Guide guide;
