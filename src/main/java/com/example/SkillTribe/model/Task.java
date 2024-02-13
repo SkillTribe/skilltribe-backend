@@ -6,14 +6,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
+import java.util.Set;
 
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)
 @Entity
 @Table(name = "task")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Task {
+public abstract class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")
@@ -27,7 +27,7 @@ public class Task {
             joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "task_id",
                     referencedColumnName = "id"))
-    protected HashSet<Skill> relatedSkill;
+    protected Set<Skill> relatedSkill;
     @Column(name = "experience")
     protected Integer experience;
     @Enumerated(value = EnumType.STRING)

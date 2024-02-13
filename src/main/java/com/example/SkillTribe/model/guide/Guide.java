@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -17,14 +17,14 @@ public class Guide extends BaseModel {
     private String name;
     @Column(name = "description")
     private String description;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private GuidePlan guidePlan;
     @ManyToMany
     @JoinTable(name = "guide_skill",
             joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "guide_id",
                     referencedColumnName = "id"))
-    private HashSet<Skill> skills;
+    private Set<Skill> skills;
 
     public void update(Guide guide) {
         this.name = guide.getName();
