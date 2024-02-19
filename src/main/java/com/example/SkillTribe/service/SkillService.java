@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface SkillService {
     List<Skill> getAll();
-    List<Skill> getPrerequisedSkills(Long id);
+    List<Skill> getPrerequisiteSkills(Long id);
     Skill getById(Long id);
     Skill createSkill(Skill skill);
     Skill updateSkill(Long id, Skill skill);
     void deleteSkill(Skill skill);
 
-    Skill addPrerequisedSkill(Long id, Skill skill);
-    Skill removePrerequisedSkill(Long id, Skill skill);
+    Skill addPrerequisiteSkill(Long id, Skill skill);
+    Skill removePrerequisiteSkill(Long id, Skill skill);
 }

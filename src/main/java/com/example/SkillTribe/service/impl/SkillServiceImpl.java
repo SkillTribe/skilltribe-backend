@@ -26,7 +26,7 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public List<Skill> getPrerequisedSkills(Long id) {
+    public List<Skill> getPrerequisiteSkills(Long id) {
         return getById(id).getPrerequisiteSkills().stream().toList();
     }
 
@@ -37,7 +37,7 @@ public class SkillServiceImpl implements SkillService {
 
     @Override
     public Skill createSkill(Skill skill) {
-        if(!skill.getPrerequisiteSkills().isEmpty()) {
+        if(skill.getPrerequisiteSkills() != null && !skill.getPrerequisiteSkills().isEmpty()) {
             Set<Skill> skills = skill.getPrerequisiteSkills().stream().map(s -> getById(s.getId())).collect(Collectors.toSet());
             skill.setPrerequisiteSkills((HashSet)skills);
         }
@@ -58,14 +58,14 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
-    public Skill addPrerequisedSkill(Long id, Skill skill) {
+    public Skill addPrerequisiteSkill(Long id, Skill skill) {
         Skill toUpdate= getById(id);
         toUpdate.getPrerequisiteSkills().add(skill);
         return skillRepository.save(toUpdate);
     }
 
     @Override
-    public Skill removePrerequisedSkill(Long id, Skill skill) {
+    public Skill removePrerequisiteSkill(Long id, Skill skill) {
         Skill toUpdate= getById(id);
         toUpdate.getPrerequisiteSkills().remove(skill);
         return skillRepository.save(toUpdate);

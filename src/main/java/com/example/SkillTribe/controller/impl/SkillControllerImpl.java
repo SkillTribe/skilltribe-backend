@@ -29,8 +29,8 @@ class SkillControllerImpl implements SkillController {
     }
 
     @Override
-    public List<SkillResponse> getPrerequisedSkills(Long id) {
-        return skillService.getPrerequisedSkills(id).stream().map(SkillResponse::new).collect(Collectors.toList());
+    public List<SkillResponse> getPrerequisiteSkills(Long id) {
+        return skillService.getPrerequisiteSkills(id).stream().map(SkillResponse::new).collect(Collectors.toList());
     }
 
     @Override
@@ -49,12 +49,12 @@ class SkillControllerImpl implements SkillController {
     }
 
     @Override
-    public SkillResponse addPrerequisedSkill(Long mainId, Long preId) {
-        return new SkillResponse(skillService.addPrerequisedSkill(mainId, skillService.getById(preId)));
+    public SkillResponse addPrerequisiteSkill(Long mainId, Long preId) {
+        return new SkillResponse(skillService.addPrerequisiteSkill(mainId, skillService.getById(preId)));
     }
 
     @Override
-    public SkillResponse removePrerequisedSkill(Long id, Long preId) {
-        return new SkillResponse(skillService.removePrerequisedSkill(id, skillService.getById(preId)));
+    public SkillResponse removePrerequisiteSkill(Long mainId, Long preId) {
+        return new SkillResponse(skillService.removePrerequisiteSkill(mainId, skillService.getById(preId)));
     }
 }

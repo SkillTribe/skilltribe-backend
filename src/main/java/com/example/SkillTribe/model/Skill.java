@@ -19,7 +19,7 @@ public class Skill extends BaseModel{
     @Column(name = "description")
     private String description;
     @ElementCollection(targetClass = Skill.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "skills", joinColumns = @JoinColumn(name = "id"))
+    @CollectionTable(name = "prerequisite_skills", joinColumns = @JoinColumn(name = "id"))
     private Set<Skill> prerequisiteSkills;
     @Enumerated(value = EnumType.STRING)
     @Column(name = "skill_level")
