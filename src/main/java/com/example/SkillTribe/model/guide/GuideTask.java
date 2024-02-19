@@ -17,4 +17,8 @@ public class GuideTask extends Task {
     private GuidePlan guidePlan;
     @Column(name = "repetition")
     private Integer repetition;
+
+    public GuideTask(Long id){
+        this.id = id;
+    }
 }

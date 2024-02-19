@@ -3,10 +3,10 @@ package com.example.SkillTribe.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -20,14 +20,14 @@ public class BaseModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     protected Long id;
-    @CreatedDate
+    @CreationTimestamp
     @Column(name = "created_at")
     protected LocalDateTime createdAt;
     @Column(name = "created_by")
     protected String createdBy;
-    @LastModifiedDate
+    @UpdateTimestamp
     @Column(name = "updated_at")
     protected LocalDateTime updatedAt;
     @Column(name = "is_deleted")
-    protected Boolean isDeleted;
+    protected Boolean isDeleted = Boolean.FALSE;
 }

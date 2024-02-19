@@ -23,7 +23,11 @@ public class SkillResponse {
         this.id = skill.getId();
         this.name = skill.getName();
         this.description = skill.getDescription();
-        this.prerequisiteSkills = skill.getPrerequisiteSkills().stream().map(SkillResponse::new).collect(Collectors.toSet());
+        if(skill.getPrerequisiteSkills() != null)
+            this.prerequisiteSkills = skill.getPrerequisiteSkills()
+                    .stream()
+                    .map(SkillResponse::new)
+                    .collect(Collectors.toSet());
         this.skillLevel = skill.getSkillLevel();
     }
 }
