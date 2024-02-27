@@ -23,8 +23,7 @@ public class ExecutableTaskRequest extends TaskRequest{
         ExecutableTask executableTask = new ExecutableTask();
         executableTask.setName(this.name);
         executableTask.setDescription(this.description);
-        executableTask.setRelatedSkill(this.relatedSkills.stream().map(Skill::new).collect(Collectors.toSet()));
-        executableTask.setExperience(this.experience);
+        //executableTask.setRelatedSkill(this.relatedSkills.stream().map(Skill::new).collect(Collectors.toSet()));
         executableTask.setTaskGoal(this.taskGoal);
         executableTask.setDue(this.due);
         executableTask.setComment(this.comment);

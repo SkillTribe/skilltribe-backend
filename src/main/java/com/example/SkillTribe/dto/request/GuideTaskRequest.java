@@ -1,16 +1,15 @@
 package com.example.SkillTribe.dto.request;
 
-import com.example.SkillTribe.model.Skill;
 import com.example.SkillTribe.model.guide.GuideTask;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.stream.Collectors;
-
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class GuideTaskRequest  extends TaskRequest {
     private Integer repetition;
 
@@ -18,8 +17,7 @@ public class GuideTaskRequest  extends TaskRequest {
         GuideTask guideTask = new GuideTask();
         guideTask.setName(this.name);
         guideTask.setDescription(this.description);
-        guideTask.setRelatedSkill(this.relatedSkills.stream().map(Skill::new).collect(Collectors.toSet()));
-        guideTask.setExperience(this.experience);
+        //guideTask.setRelatedSkill(this.relatedSkills.stream().map(Skill::new).collect(Collectors.toSet()));
         guideTask.setTaskGoal(this.taskGoal);
         guideTask.setRepetition(this.repetition);
         return guideTask;

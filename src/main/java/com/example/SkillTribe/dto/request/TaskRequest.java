@@ -5,15 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-
 @Getter
 @Setter
 @NoArgsConstructor
 public class TaskRequest {
     protected String name;
     protected String description;
-    protected HashSet<Long> relatedSkills;
-    protected Integer experience;
+    //protected HashSet<Long> relatedSkills;
     protected ETaskGoal taskGoal;
 }

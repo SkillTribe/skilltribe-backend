@@ -17,16 +17,14 @@ public class TaskResponse {
     protected Long id;
     protected String name;
     protected String description;
-    protected Set<SkillResponse> relatedSkill;
-    protected Integer experience;
+    //protected Set<SkillResponse> relatedSkill;
     protected ETaskGoal taskGoal;
 
     public TaskResponse(Task task){
         this.id = task.getId();
         this.name = task.getName();
         this.description = task.getDescription();
-        this.relatedSkill = task.getRelatedSkill().stream().map(SkillResponse::new).collect(Collectors.toSet());
-        this.experience = task.getExperience();
+        //this.relatedSkill = task.getRelatedSkill().stream().map(SkillResponse::new).collect(Collectors.toSet());
         this.taskGoal = task.getTaskGoal();
     }
 }

@@ -2,8 +2,10 @@ package com.example.SkillTribe.service.impl;
 
 import com.example.SkillTribe.exception.NotFoundException;
 import com.example.SkillTribe.model.Skill;
+import com.example.SkillTribe.model.guide.GuidePlan;
 import com.example.SkillTribe.model.guide.GuideTask;
 import com.example.SkillTribe.service.GuideTaskService;
+import com.example.SkillTribe.service.repository.guide.GuidePlanRepository;
 import com.example.SkillTribe.service.repository.guide.GuideTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,14 +16,21 @@ import java.util.List;
 @Service
 class GuideTaskServiceImpl implements GuideTaskService {
     private final GuideTaskRepository guideTaskRepository;
+    private final GuidePlanRepository guidePlanRepository;
     @Autowired
-    public GuideTaskServiceImpl(GuideTaskRepository guideTaskRepository) {
+    public GuideTaskServiceImpl(GuideTaskRepository guideTaskRepository, GuidePlanRepository guidePlanRepository) {
         this.guideTaskRepository = guideTaskRepository;
+        this.guidePlanRepository = guidePlanRepository;
     }
 
     @Override
     public List<GuideTask> getAll() {
         return guideTaskRepository.findAll();
+    }
+
+    @Override
+    public List<GuideTask> getAllByGuideId(Long id) {
+        return guideTaskRepository.findAllByGuidePlanGuideId(id);
     }
 
     @Override
@@ -43,20 +52,24 @@ class GuideTaskServiceImpl implements GuideTaskService {
 
     @Override
     public void deleteGuideTask(GuideTask task) {
-        task.setRelatedSkill(new HashSet<>());
-        guideTaskRepository.save(task);
+        //task.setRelatedSkill(new HashSet<>());
+        GuidePlan guidePlan = task.getGuidePlan();
+        task.setGuidePlan(null);
+        guidePlan.getGuideTasks().remove(task);
+        guidePlanRepository.save(guidePlan);
         guideTaskRepository.delete(task);
     }
 
-    @Override
+
+    /*@Override
     public GuideTask addRelatedSkill(GuideTask task, Skill skill) {
-        task.getRelatedSkill().add(skill);
+        //task.getRelatedSkill().add(skill);
         return guideTaskRepository.save(task);
     }
 
     @Override
     public GuideTask removeRelatedSkill(GuideTask task, Skill skill) {
-        task.getRelatedSkill().remove(skill);
+        //task.getRelatedSkill().remove(skill);
         return guideTaskRepository.save(task);
-    }
+    }*/
 }
