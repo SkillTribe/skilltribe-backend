@@ -1,22 +1,18 @@
 package com.example.SkillTribe.skill;
 
+import com.example.SkillTribe.BaseIntegrationTest;
 import com.example.SkillTribe.SkillTribeApplication;
 import com.example.SkillTribe.dto.request.SkillRequest;
 import com.example.SkillTribe.dto.response.SkillResponse;
 import com.example.SkillTribe.model.enums.ESkillLevel;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 //@TestPropertySource(locations = "classpath:integration-test-properties")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public class SkillIntegrationTest {
-
-    @Autowired
-    private MockMvc mvc;
+public class SkillIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void getListOfSkillsTest() throws Exception {
@@ -231,14 +224,5 @@ public class SkillIntegrationTest {
                 return false;
         }
         return true;
-    }
-    private String getJson(Object o) throws JsonProcessingException {
-        ObjectMapper om = new ObjectMapper();
-        return om.writerWithDefaultPrettyPrinter().writeValueAsString(o);
-    }
-    private <T> T getRequiredTypeFromJson(String json, TypeReference<T> type) throws JsonProcessingException {
-        ObjectMapper om = new ObjectMapper();
-        JsonNode jsonNode = om.readTree(json);
-        return om.convertValue(jsonNode, type);
     }
 }
