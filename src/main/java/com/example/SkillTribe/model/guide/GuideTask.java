@@ -12,7 +12,7 @@ import lombok.Setter;
 @Table(name = "guide_task")
 @NoArgsConstructor
 public class GuideTask extends Task {
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "guide_plan_id")
     private GuidePlan guidePlan;
     @Column(name = "repetition")
@@ -20,5 +20,21 @@ public class GuideTask extends Task {
 
     public GuideTask(Long id){
         this.id = id;
+    }
+
+    @Override
+    public void update(Task task) {
+        super.update(task);
+        if(task instanceof GuideTask)
+            this.repetition = ((GuideTask) task).repetition;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null)
+            return false;
+        if(!(obj instanceof GuideTask))
+            return false;
+        return ((GuideTask) obj).getId().equals(this.id);
     }
 }

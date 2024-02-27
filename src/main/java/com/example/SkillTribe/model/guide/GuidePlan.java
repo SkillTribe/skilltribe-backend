@@ -15,7 +15,7 @@ public class GuidePlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "guidePlan")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "guidePlan")
     private Set<GuideTask> guideTasks;
     @OneToOne
     @JoinColumn(name = "guide_id")

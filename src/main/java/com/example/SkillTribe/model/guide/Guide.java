@@ -17,7 +17,7 @@ public class Guide extends BaseModel {
     private String name;
     @Column(name = "description")
     private String description;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "guide")
     private GuidePlan guidePlan;
     @ManyToMany
     @JoinTable(name = "guide_skill",

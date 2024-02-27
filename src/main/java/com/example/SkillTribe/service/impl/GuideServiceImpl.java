@@ -70,7 +70,7 @@ class GuideServiceImpl implements GuideService {
     public Guide addTask(Long guideId, GuideTask guideTask) {
         Guide guide = getById(guideId);
         GuidePlan guidePlan = guide.getGuidePlan();
-        guideTask.setGuidePlan(guidePlan);
+        //guideTask.setGuidePlan(guidePlan);
         guideTask = guideTaskRepository.save(guideTask);
         return guide;
     }
@@ -80,7 +80,7 @@ class GuideServiceImpl implements GuideService {
         Guide guide = getById(guideId);
         GuidePlan guidePlan = guide.getGuidePlan();
         GuideTask guideTask = guideTaskRepository.findById(guideId).orElseThrow(() -> new NotFoundException(GuideTask.class, guideTaskId));
-        guideTask.setGuidePlan(null);
+        //guideTask.setGuidePlan(null);
         guidePlan.getGuideTasks().remove(guideTask);
         guideTask = guideTaskRepository.save(guideTask);
         return guide;

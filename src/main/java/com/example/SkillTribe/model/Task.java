@@ -16,25 +16,23 @@ public abstract class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     protected Long id;
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     protected String name;
     @Column(name = "description")
     protected String description;
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(name = "task_skill",
             joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "task_id",
                     referencedColumnName = "id"))
-    protected Set<Skill> relatedSkill;
-    @Column(name = "experience")
-    protected Integer experience;
+    protected Set<Skill> relatedSkill;*/
     @Enumerated(value = EnumType.STRING)
     @Column(name = "task_goal")
     protected ETaskGoal taskGoal;
 
     public void update(Task task) {
+        this.name = task.name;
         this.description = task.description;
-        this.experience = task.experience;
         this.taskGoal = task.taskGoal;
     }
 }

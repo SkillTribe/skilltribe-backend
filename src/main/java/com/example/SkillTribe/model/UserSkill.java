@@ -19,7 +19,5 @@ public class UserSkill {
     @ManyToOne
     @JoinColumn(name = "skill_id")
     private Skill skill;
-    @Column(name = "current_experience")
-    private Integer currentExperience;
 
 }

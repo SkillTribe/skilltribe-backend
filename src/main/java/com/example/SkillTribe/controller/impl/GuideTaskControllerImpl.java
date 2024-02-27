@@ -27,6 +27,11 @@ class GuideTaskControllerImpl implements GuideTaskController {
     }
 
     @Override
+    public List<GuideTaskResponse> getAllByGuideId(Long id) {
+        return guideTaskService.getAllByGuideId(id).stream().map(GuideTaskResponse::new).collect(Collectors.toList());
+    }
+
+    @Override
     public GuideTaskResponse getById(Long id) {
         return new GuideTaskResponse(guideTaskService.getById(id));
     }
@@ -42,11 +47,11 @@ class GuideTaskControllerImpl implements GuideTaskController {
     }
 
     @Override
-    public void deleteTask(Long taskId) {
-        guideTaskService.deleteGuideTask(guideTaskService.getById(taskId));
+    public void deleteTask(Long id) {
+        guideTaskService.deleteGuideTask(guideTaskService.getById(id));
     }
 
-    @Override
+   /* @Override
     public GuideTaskResponse addRelatedSkill(Long taskId, Long skillId) {
         return new GuideTaskResponse(guideTaskService.addRelatedSkill(guideTaskService.getById(taskId), skillService.getById(skillId)));
     }
@@ -54,5 +59,5 @@ class GuideTaskControllerImpl implements GuideTaskController {
     @Override
     public GuideTaskResponse removeRelatedSkill(Long taskId, Long skillId) {
         return new GuideTaskResponse(guideTaskService.removeRelatedSkill(guideTaskService.getById(taskId), skillService.getById(skillId)));
-    }
+    }*/
 }
